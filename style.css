@@ -1,0 +1,85 @@
+*{
+    text-align: center;
+}
+body{
+    background-image: url(img/bgimg.jpg);
+    background-size: 1900px;
+    background-repeat: no-repeat;
+}
+h1{
+    background-color: rgba(166, 83, 0, 0.659);
+    border-radius: 10px;
+}
+button{
+    background-color: rgba(68, 180, 250, 0.397);
+    font-size: 140%;
+    transition: 0.35s;
+    /* border-radius: 10%; */
+}
+button:hover{
+    border-width: 0.3em;
+    border-color: rgba(255, 188, 87, 0.81);
+}
+button:active{
+    background-color:rgba(255, 188, 87, 0.81);
+}
+
+/* 가위바위보 버튼배경 선택자 */
+.playbtns{
+    gap: 200px;
+    /* display: flex;
+    flex-direction: column;
+    align-content: space-around; */
+}
+/* 옵션 버튼배경 선택자 */
+.optionbtns{
+    padding-top: 5%;
+    gap: 20px;
+    display: flexbox;
+    align-content: space-around;
+
+}
+/* 가위바위보 선택자 */
+.playerSelection{
+    padding: 10%;
+    border-radius: 25px;
+}
+/* 각각 버튼 */
+.rock{
+    background-image: url(img/rock.jpg);
+    color: rgb(250, 250, 250);
+    background-position: 50%;
+    background-size: 500px;
+    background-repeat: no-repeat;
+}
+.paper{
+    background-image: url(img/paper.jpg);
+    background-position: 50%;
+    background-size: 100px;
+    /* background-repeat: no-repeat; */
+}
+.scissors{
+    background-image: url(img/scissors.jpg);
+    color: aliceblue;
+    background-position: 50%;
+    background-size: 500px;
+    background-repeat: no-repeat;
+}
+
+
+/* 옵션 선택자 */
+.thatopt{
+    border-radius: 20px;
+    margin: 20px
+}
+
+/* 통계창 */
+.offStatic{
+    visibility: hidden;
+}
+#theStatic{
+    border-radius: 0.5em;
+    max-width: 450px;
+    background-color: rgba(24, 151, 255, 0.44);
+    list-style: none;
+}

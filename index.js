@@ -1,51 +1,115 @@
-//컴퓨터가 낼 수
-const aiStans = Math.floor(Math.random()*3)+1
+//html선택자
+const result = document.querySelector('.result');//결과창 선택자
+const rockBtn = document.querySelector('.rock');//바위 버튼
+const paperBtn = document.querySelector('.paper');//보 버튼
+const scissorsBtn = document.querySelector('.scissors');//가위 버튼
+const clearBtn = document.querySelector('.clearBtn'); //게임초기화 버튼
+const details = document.querySelector('.details')//게임 해설창
+const outCome = document.querySelector('.outCome')//ai vs player
 
-let aiResult;
+const onOffStatics = document.querySelector('.statics')//통계창 온오프 스위치
+const allStatics = document.querySelector('#theStatic')//전체통계창
+const winStatic = document.querySelector('.winStatic');//승리통계창
+const loseStatic = document.querySelector('.loseStatic');//패배통계창
+const tieStatic = document.querySelector('.tieStatic');//무승부통계창
+const rates = document.querySelector('.rates');//승률통계창
 
-if(aiStans == 1){
-    aiResult = "가위";
+//게임통계
+let winRate = 0;
+let loseRate = 0;
+let tieRate = 0;
+let totalGame = () => winRate + loseRate + tieRate;
+const getTotalRate = () =>{
+    let rate = winRate+(tieRate*0.5)/(totalGame())*100;
+    return rate.toFixed(3);
 }
-if(aiStans == 2){
-    aiResult = "바위";
 
-}if(aiStans == 3){
-    aiResult = "보";
-}
-
-//게임 결과 함수
+//승패함수
 const win = ()=>{
-    document.write('이겼습니다!<br>')
-    document.write(`${playerResult}는 ${aiResult}를 이깁니다`)
+    result.innerHTML = `니가 이겼다...`
     console.log('이겼습니다!')
 }
 const lose = () =>{
-    document.write('졌습니다!<br>')
-    document.write(`${playerResult}는 ${aiResult}를 이길 수 없습니다.`)
+    result.innerHTML =`강해져서 돌아와라!`
     console.log('졌습니다!')
 }
 const tie = () =>{
-    document.write('비겼습니다!')
+    result.innerHTML = `비긴걸로 하지 않을래...?`
     console.log('비겼습니다!')
 }
-
-//player가 낼 수
-let playerResult = prompt('가위바위보 게임을 시작하지: 가위 바위 보!')
-
-if(aiResult === playerResult){ //비겼을 때
-    tie();
-} else if(aiResult === '가위' && playerResult ==='바위'){ //ai가 가위 일 때
-    win()
-} else if(aiResult === '가위' && playerResult ==='보'){ //ai가 가위 일 때
-    lose()
-}else if(aiResult === '바위' && playerResult ==='보'){ //ai가 바위 일 때
-    win()
-}else if(aiResult === '바위' && playerResult ==='가위'){ //ai가 바위 일 때
-    lose()
-}else if(aiResult === '보' && playerResult ==='가위'){ //ai가 보 일 때
-    win()
-}else if(aiResult === '보' && playerResult ==='바위'){ //ai가 보 일 때
-    lose()
-} else {
-    document.write('가위, 바위, 보 중 하나를 입력해주세요')
+//ai함수
+const aiDecision = () =>{
+    const aiStans = Math.floor(Math.random()*3)+1
+    let aiResult;
+    switch(aiStans){
+        case 1:
+            aiResult = '가위';
+            break;
+        case 2:
+            aiResult = '바위';
+            break;
+        case 3:
+            aiResult = '보';
+            break;
+    }
+    return aiResult;
 }
+
+//게임함수
+const clickEvt = (playerValue) =>{
+    let aiResult = aiDecision()
+    if(aiResult === playerValue){
+        tie();
+        tieRate ++;
+    } else if(
+        (aiResult === '가위' && playerValue ==='바위')||
+        (aiResult === '바위' && playerValue === '보') ||
+        (aiResult === '보' && playerValue === '가위')
+    ){
+        win();
+        winRate ++;
+        details.innerHTML = `${playerValue}는 ${aiResult}를 이깁니다!`
+    } else{
+        lose();
+        loseRate ++;
+        details.innerHTML = `${playerValue}는 ${aiResult}를 이길 수 없습니다`
+    }
+    outCome.innerHTML = `${playerValue} VS ${aiResult}`
+    winStatic.innerHTML = `승리: ${winRate}`;
+    loseStatic.innerHTML = `패배: ${loseRate}`;
+    tieStatic.innerHTML = `무승부: ${tieRate}`;
+    rates.innerHTML = `승률: ${getTotalRate()}%`
+}
+
+//가위를 눌렀을 때
+scissorsBtn.addEventListener('click',()=>{
+    clickEvt('가위')
+})
+//바위를 눌렀을 때
+rockBtn.addEventListener('click',()=>{
+    clickEvt('바위')
+})
+//보를 눌렀을 때
+paperBtn.addEventListener('click',()=>{
+    clickEvt('보')
+})
+
+//초기화를 눌렀을 때
+clearBtn.addEventListener('click',()=>{
+    winRate = 0;
+    loseRate = 0;
+    tieRate = 0;
+    result.innerHTML = "가위 바위 보로 승부닷!!!"
+    details.innerHTML = "";
+    outCome.innerHTML = "";
+    rates.innerHTML = `승률: 0%`
+    winStatic.innerHTML = `승리: ${winRate}`;
+    loseStatic.innerHTML = `패배: ${loseRate}`;
+    tieStatic.innerHTML = `무승부: ${tieRate}`;
+    console.clear()
+})
+
+//통계를 눌렀을 때
+onOffStatics.addEventListener('click',()=>{
+    allStatics.classList.toggle("offStatic")
+})
