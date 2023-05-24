@@ -13,6 +13,9 @@ const winStatic = document.querySelector('.winStatic');//승리통계창
 const loseStatic = document.querySelector('.loseStatic');//패배통계창
 const tieStatic = document.querySelector('.tieStatic');//무승부통계창
 const rates = document.querySelector('.rates');//승률통계창
+rates.addEventListener('click',()=>{
+    alert('무승부는 승리의 0.5로 취급한다.')
+})
 
 //게임통계
 let winRate = 0;
