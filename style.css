@@ -25,12 +25,15 @@ button:active{
 }
 
 /* 가위바위보 버튼배경 선택자 */
-.playbtns{
-    gap: 200px;
-    /* display: flex;
+@media screen and (max-width: 450px) {
+    .playbtns{
+    gap: 20px;
+    display: flex;
     flex-direction: column;
-    align-content: space-around; */
+    align-content: space-around;
 }
+}
+
 /* 옵션 버튼배경 선택자 */
 .optionbtns{
     padding-top: 5%;
@@ -82,4 +85,11 @@ button:active{
     max-width: 450px;
     background-color: rgba(24, 151, 255, 0.44);
     list-style: none;
+}
+
+@media (width:400px){
+    .playbtns{
+        display: flex;
+        flex-direction: column;
+    }
 }
