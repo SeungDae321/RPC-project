@@ -1,6 +1,6 @@
 *{
     text-align: center;
-}
+} 
 body{
     background-image: url(img/bgimg.jpg);
     background-size: 1900px;
@@ -92,4 +92,12 @@ button:active{
         display: flex;
         flex-direction: column;
     }
+}
+
+.explanation{
+    transition: 4s;
+}
+.explanation:hover{
+    font-size: 100px;
+    background-color: rgba(0, 0, 0, 0.103);
 }
