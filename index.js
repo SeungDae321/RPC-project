@@ -1,23 +1,22 @@
-//html선택자
-const result = document.querySelector('.result');//결과창 선택자
-const rockBtn = document.querySelector('.rock');//바위 버튼
-const paperBtn = document.querySelector('.paper');//보 버튼
-const scissorsBtn = document.querySelector('.scissors');//가위 버튼
-const clearBtn = document.querySelector('.clearBtn'); //게임초기화 버튼
-const details = document.querySelector('.details')//게임 해설창
+//html selectors
+const result = document.querySelector('.result');//result selector
+const rockBtn = document.querySelector('.rock');//rock btn
+const paperBtn = document.querySelector('.paper');// paper btn
+const scissorsBtn = document.querySelector('.scissors');//scissors btn
+const clearBtn = document.querySelector('.clearBtn'); //clear btn
+const details = document.querySelector('.details')//explain last game
 const outCome = document.querySelector('.outCome')//ai vs player
 
-const onOffStatics = document.querySelector('.statics')//통계창 온오프 스위치
-const allStatics = document.querySelector('#theStatic')//전체통계창
-const winStatic = document.querySelector('.winStatic');//승리통계창
-const loseStatic = document.querySelector('.loseStatic');//패배통계창
-const tieStatic = document.querySelector('.tieStatic');//무승부통계창
-const rates = document.querySelector('.rates');//승률통계창
-//n VS n 선택자
-const situation = document.querySelector('.situation');
+const onOffStatics = document.querySelector('.statics')// static on/off btn
+const allStatics = document.querySelector('#theStatic')
+const winStatic = document.querySelector('.winStatic');
+const loseStatic = document.querySelector('.loseStatic');
+const tieStatic = document.querySelector('.tieStatic');
+const rates = document.querySelector('.rates');
+const situation = document.querySelector('.situation'); //show N vs N
 
 rates.addEventListener('click',()=>{
-    alert('무승부는 승리로 취급하지 않는다.')
+    alert('TIES are NOT count as WINS.')
 })
 
  
@@ -34,113 +33,112 @@ const getTotalRate = () =>{
 
 
 
-//승패함수
+//win & lose func
 const win = ()=>{
-    result.innerHTML = `니가 이겼다...`
-    console.log('이겼습니다!')
+    result.innerHTML = `yeah... you won this time`
+    console.log('win!')
 }
 const lose = () =>{
-    result.innerHTML =`강해져서 돌아와라!`
-    console.log('졌습니다!')
+    result.innerHTML =`you've just beaten up!`
+    console.log('lose!')
 }
 const tie = () =>{
-    result.innerHTML = `비긴걸로 하지 않을래...?`
-    console.log('비겼습니다!')
+    result.innerHTML = `Lets call it a tie...`
+    console.log('tie!')
 }
-//ai함수
+//ai func
 const aiDecision = () =>{
     const aiStans = Math.floor(Math.random()*3)+1
     let aiResult;
     switch(aiStans){
         case 1:
-            aiResult = '가위';
+            aiResult = 'SCISSORS';
             break;
         case 2:
-            aiResult = '바위';
+            aiResult = 'ROCK';
             break;
         case 3:
-            aiResult = '보';
+            aiResult = 'PAPER';
             break;
     }
     return aiResult;
 }
 
-//게임함수
+//game func
 const clickEvt = (playerValue) =>{
     let aiResult = aiDecision()
     if(aiResult === playerValue){
         tie();
         tieRate ++;
     } else if(
-        (aiResult === '가위' && playerValue ==='바위')||
-        (aiResult === '바위' && playerValue === '보') ||
-        (aiResult === '보' && playerValue === '가위')
+        (aiResult === 'SCISSORS' && playerValue ==='ROCK')||
+        (aiResult === 'ROCK' && playerValue === 'PAPER') ||
+        (aiResult === 'PAPER' && playerValue === 'SCISSORS')
     ){
         win();
         winRate ++;
-        details.innerHTML = `${playerValue}는 ${aiResult}를 이깁니다!`
+        details.innerHTML = `${playerValue} wins ${aiResult}!`
     } else{
         lose();
         loseRate ++;
-        details.innerHTML = `${playerValue}는 ${aiResult}를 이길 수 없습니다`
+        details.innerHTML = `${playerValue} can't win ${aiResult}`
     }
     outCome.innerHTML = `${playerValue} VS ${aiResult}`
-    winStatic.innerHTML = `승리: ${winRate}`;
-    loseStatic.innerHTML = `패배: ${loseRate}`;
-    tieStatic.innerHTML = `무승부: ${tieRate}`;
-    rates.innerHTML = `승률: ${getTotalRate()}%`
+    winStatic.innerHTML = `wins: ${winRate}`;
+    loseStatic.innerHTML = `loses: ${loseRate}`;
+    tieStatic.innerHTML = `ties: ${tieRate}`;
+    rates.innerHTML = `win rates: ${getTotalRate()}%`
     situation.innerHTML = `${winRate} VS ${loseRate}`
 
-    //최종게임 결과
+    //whole game results
     if(winRate >= 5){
-        alert('승리!!!')
+        alert('YOU WIN!!!')
         restart();
     } else if(loseRate >= 5){
-        alert('패배...ㅜㅠ')
+        alert('YOU LOSE :( ')
         restart()
     }
     /**
-     * 게임함수 안에서만 winRate나 loseRate가 바뀌니까
-     * Rate에 의존하는 최종게임 결과 로직은 게임함수 안에서 동작해야 한다.
+     * this whole game results are relying on rates(win/lose/tie rates) that change inside of the game func
+     * so, this logic should be inside of the game func too.
      */
 }
 
-//가위를 눌렀을 때
+//when scissors btn clicked
 scissorsBtn.addEventListener('click',()=>{
-    clickEvt('가위')
+    clickEvt('SCISSORS')
 })
-//바위를 눌렀을 때
+//when rock btn clicked
 rockBtn.addEventListener('click',()=>{
-    clickEvt('바위')
+    clickEvt('ROCK')
 })
-//보를 눌렀을 때
+//when paper btn clicked
 paperBtn.addEventListener('click',()=>{
-    clickEvt('보')
+    clickEvt('PAPER')
 })
 
-//초기화를 눌렀을 때
-
+//when claer btn clicked
 clearBtn.addEventListener('click',(restart))
 
 
-//통계를 눌렀을 때
+//when statics btn clicked
 onOffStatics.addEventListener('click',()=>{
     allStatics.classList.toggle("offStatic")
 })
 
 
-//재시작 함수 - 엥커링이 되도록 function키워드로 선언함.
+//restart func - decleared with "funciton" key word to make sure for hoisting.
 function restart(){
     winRate = 0;
     loseRate = 0;
     tieRate = 0;
-    result.innerHTML = "가위 바위 보로 승부닷!!!"
+    result.innerHTML = "Lets Play ROCK PAPER SCISSORS!!!"
     details.innerHTML = "";
     outCome.innerHTML = "";
-    rates.innerHTML = `승률: 0%`
-    winStatic.innerHTML = `승리: ${winRate}`;
-    loseStatic.innerHTML = `패배: ${loseRate}`;
-    tieStatic.innerHTML = `무승부: ${tieRate}`;
+    rates.innerHTML = `win rates: 0%`
+    winStatic.innerHTML = `wins: ${winRate}`;
+    loseStatic.innerHTML = `loses: ${loseRate}`;
+    tieStatic.innerHTML = `ties: ${tieRate}`;
     situation.innerHTML = 'player VS AI'
     console.clear()
 }

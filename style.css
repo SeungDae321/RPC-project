@@ -3,8 +3,8 @@
 } 
 body{
     background-image: url(img/bgimg.jpg);
-    background-size: 1900px;
-    background-repeat: no-repeat;
+    background-size: 1920px 1080px;
+    /* background-repeat: no-repeat; */
 }
 h1{
     background-color: rgba(166, 83, 0, 0.659);
@@ -24,17 +24,16 @@ button:active{
     background-color:rgba(255, 188, 87, 0.81);
 }
 
-/* 가위바위보 버튼배경 선택자 */
+/* ROCK PAPER SCISSORS btn bg selector */
 @media screen and (max-width: 450px) {
     .playbtns{
-    gap: 20px;
     display: flex;
     flex-direction: column;
     align-content: space-around;
 }
 }
 
-/* 옵션 버튼배경 선택자 */
+/* clear & statics btn selector */
 .optionbtns{
     padding-top: 5%;
     gap: 20px;
@@ -42,12 +41,12 @@ button:active{
     align-content: space-around;
 
 }
-/* 가위바위보 선택자 */
+/* Rock Paper Scissors btn selector */
 .playerSelection{
     padding: 10%;
     border-radius: 25px;
 }
-/* 각각 버튼 */
+/* each R P C btn */
 .rock{
     background-image: url(img/rock.jpg);
     color: rgb(250, 250, 250);
@@ -70,13 +69,13 @@ button:active{
 }
 
 
-/* 옵션 선택자 */
+/* options btn */
 .thatopt{
     border-radius: 20px;
     margin: 20px
 }
 
-/* 통계창 */
+/* statics */
 .offStatic{
     visibility: hidden;
 }

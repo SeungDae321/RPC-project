@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <h1>ROCK PAPER SCISSORS <span><a href="index.html"><button>Eng</button></a></span></h1>
+    <div class="gameReslut">
+        <h2 class="result kor">가위 바위 보로 승부닷!!!</h2>
+        <p class="explanation">5점 획득시 승리!</p>
+        <h3 class="outCome"></h3>
+        <p class="situation">player VS AI</p>
+        <div class="details"></div>
+    </div>
+    <div class="playbtns">
+        <button class="rock playerSelection" value="rock">바위</button>
+        <button class="paper playerSelection" value="paper">보</button>
+        <button class="scissors playerSelection" value="scissors">가위</button>
+    </div>
+    <div class="optionbtns">
+        <button class="clearBtn thatopt">초기화</button>
+        <button class="statics thatopt">통계</button>
+    </div>
+    <div id="theStatic" class="offStatic">
+        <div>
+            <ul>
+                <li class="rates">승률: 0%</li>
+                <li class="winStatic">승리: 0</li>
+                <li class="loseStatic">패배: 0</li>
+                <li class="tieStatic">무승부: 0</li>
+            </ul>
+        </div>
+    </div>
+    <script src="korVer.js"></script>
+    <!-- <script src="convertLang.js"></script> -->
+</body>
+</html>
