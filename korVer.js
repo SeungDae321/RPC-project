@@ -16,6 +16,8 @@ const rates = document.querySelector('.rates');//승률통계창
 //n VS n 선택자
 const situation = document.querySelector('.situation');
 
+const playerSelection = document.querySelectorAll('.playerSelection')
+
 rates.addEventListener('click',()=>{
     alert('무승부는 승리로 취급하지 않는다.')
 })
@@ -93,11 +95,13 @@ const clickEvt = (playerValue) =>{
 
     //최종게임 결과
     if(winRate >= 5){
-        alert('승리!!!')
-        restart();
+        result.innerText = "승리!!!"
+        disablebtns()
+        result.addEventListener('click', restart)
     } else if(loseRate >= 5){
-        alert('패배...ㅜㅠ')
-        restart()
+        result.innerText = "패배... ㅜㅠ"
+        disablebtns()
+        result.addEventListener('click', restart)
     }
     /**
      * 게임함수 안에서만 winRate나 loseRate가 바뀌니까
@@ -143,6 +147,14 @@ function restart(){
     tieStatic.innerHTML = `무승부: ${tieRate}`;
     situation.innerHTML = 'player VS AI'
     console.clear()
+    disablebtns()
+}
+
+function disablebtns(){
+    for(let btns of playerSelection){
+        btns.classList.toggle('disappear')
+    };
+    result.classList.toggle('bigger')
 }
 
 // const convert = document.querySelector('.convert');

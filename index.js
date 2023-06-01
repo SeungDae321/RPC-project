@@ -15,6 +15,8 @@ const tieStatic = document.querySelector('.tieStatic');
 const rates = document.querySelector('.rates');
 const situation = document.querySelector('.situation'); //show N vs N
 
+const playerSelection = document.querySelectorAll('.playerSelection')
+
 rates.addEventListener('click',()=>{
     alert('TIES are NOT count as WINS.')
 })
@@ -92,11 +94,15 @@ const clickEvt = (playerValue) =>{
 
     //whole game results
     if(winRate >= 5){
-        alert('YOU WIN!!!')
-        restart();
+        result.innerText = "YOU WIN!!!"
+        disablebtns()
+        result.addEventListener('click', restart)
+        
     } else if(loseRate >= 5){
-        alert('YOU LOSE :( ')
-        restart()
+        result.innerText = "YOU LOSE... :("
+        disablebtns()
+        result.addEventListener('click', restart)
+        
     }
     /**
      * this whole game results are relying on rates(win/lose/tie rates) that change inside of the game func
@@ -141,4 +147,12 @@ function restart(){
     tieStatic.innerHTML = `ties: ${tieRate}`;
     situation.innerHTML = 'player VS AI'
     console.clear()
+    disablebtns()
+}
+
+function disablebtns(){
+    for(let btns of playerSelection){
+        btns.classList.toggle('disappear')
+    };
+    result.classList.toggle('bigger')
 }

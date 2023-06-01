@@ -33,6 +33,16 @@ button:active{
 }
 }
 
+.disappear{
+    display: none;
+}
+
+.bigger{
+    font-size: 60px;
+    background-color: rgba(210, 105, 30, 0.495);
+    transition: 2s;
+}
+
 /* clear & statics btn selector */
 .optionbtns{
     padding-top: 5%;
