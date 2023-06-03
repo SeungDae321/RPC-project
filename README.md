@@ -1,5 +1,5 @@
 # RPC-project
-rock paper scissors game project for the odin prokject.<br>
+rock paper scissors game project for the odin project.<br>
 get five points to win<br>
 How i added the ai decision:<br>
  I used `Math.random()` method to randomly print 1, 2 or 3.<br>
